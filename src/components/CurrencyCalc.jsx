@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CurrencyInput } from "components";
 import { dataCurrency } from "./data.config";
-import currency from "currency.js";
+
 
 export function CurrencyCalc() {
   const [amount, setAmount] = useState({
