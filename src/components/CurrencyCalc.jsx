@@ -2,7 +2,6 @@ import { useState } from "react";
 import { CurrencyInput } from "components";
 import { dataCurrency } from "./data.config";
 
-
 export function CurrencyCalc() {
   const [amount, setAmount] = useState({
     import: "",
@@ -43,7 +42,7 @@ export function CurrencyCalc() {
               console.log("event", event.target.value);
               setAmount((state) => ({
                 ...state,
-                import: parseFloat(event.target.value).replace(/,/g, ""),
+                import: event.target.value,
               }));
             }}
             maskOptions={{
