@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Header,
   Main,
@@ -11,6 +12,7 @@ import { ReactComponent as MoneyExchange } from "assets/money-exchange.svg";
 
 import "styles/main.scss";
 export function App() {
+  const [results, setResults] = useState([]);
   return (
     <div className="wrapper flex flex-col h-screen">
       <Header />
@@ -22,9 +24,13 @@ export function App() {
             <span className="text-yellow-400">Dolares</span>
             <MoneyExchange className="w-48 h-48 fill-current mt-4 mx-auto md:mx-none" />
           </h1>
-          <CurrencyCalc />
+          <CurrencyCalc
+            cb={(result) => {
+              setResults(result);
+            }}
+          />
         </div>
-        <Results />
+        <Results results={results} />
         <HowWork />
         <AboutUs />
       </Main>

@@ -2,7 +2,9 @@ import { useState } from "react";
 import { CurrencyInput } from "components";
 import { dataCurrency } from "./data.config";
 
-export function CurrencyCalc() {
+export function CurrencyCalc(props) {
+  const { cb } = props;
+
   const [amount, setAmount] = useState({
     import: "",
     de: "SOL",
@@ -12,21 +14,21 @@ export function CurrencyCalc() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log("amount", amount);
-    console.log("dataCurrency", dataCurrency);
-
     const result = dataCurrency.divisas
       .filter((divisa) => divisa.currency !== amount.de)
       .map((divisa) => {
-        console.log("divisa", divisa.rates.SOL);
-        console.log("amount.import", amount.import);
+        // console.log("divisa", divisa);
         return {
           import: amount.import,
-          de: divisa.rates.SOL,
-          a: divisa.rates.SOL * amount.import,
+          de: "Soles",
+          a: divisa.text,
+          change:
+            parseFloat(amount.import.replace(/,/g, "")) /
+            parseFloat(divisa.rates.SOL),
         };
       });
-    console.log("result", result);
+
+    cb(result);
   };
 
   return (
@@ -39,7 +41,6 @@ export function CurrencyCalc() {
             type="text"
             value={amount.import}
             onKeyUp={(event) => {
-              console.log("event", event.target.value);
               setAmount((state) => ({
                 ...state,
                 import: event.target.value,
@@ -67,8 +68,10 @@ export function CurrencyCalc() {
             value={amount.de}
             disabled={true}
           >
-            {dataCurrency.divisas.map((divisa) => (
-              <option value={divisa.currency}>{divisa.text}</option>
+            {dataCurrency.divisas.map((divisa, id) => (
+              <option key={id} value={divisa.currency}>
+                {divisa.text}
+              </option>
             ))}
           </select>
         </div>
@@ -81,8 +84,10 @@ export function CurrencyCalc() {
             }
             value={amount.a}
           >
-            {dataCurrency.divisas.map((divisa) => (
-              <option value={divisa.currency}>{divisa.text}</option>
+            {dataCurrency.divisas.map((divisa, id) => (
+              <option key={id} value={divisa.currency}>
+                {divisa.text}
+              </option>
             ))}
           </select>
         </div>
