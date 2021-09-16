@@ -30,7 +30,7 @@ export function CurrencyCalc() {
   };
 
   return (
-    <div className="currency bg-gray-800 p-8 rounded-2xl w-96 ml-10 self-start">
+    <div className="currency bg-gray-800 p-8 rounded-2xl w-96 md:ml-10 self-start mt-10 mx-auto">
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="text-lg mb-2 block text-yellow-400">Importe</label>

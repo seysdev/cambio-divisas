@@ -1,6 +1,6 @@
 export function Header() {
   return (
-    <header className="header bg-primary">
+    <header className="header bg-primary px-4">
       <div className="container mx-auto py-8">
         <strong className="text-2xl bg-yellow-400 inline-flex py-2 px-4 rounded-full text-black">
           Cambia Divisas{" "}
